@@ -31,14 +31,17 @@
 
 ## 攻撃シナリオの例
 
-Example #1: 悪意のあるコンテナイメージ
+例 #1: 侵害された CI/CD パイプライン
+
+ほとんどのチームは何らかの形で自動化を使用し、コンテナイメージをビルドして中央レジストリにプッシュします。その後、オブジェクトマニフェストで定義されたとおりに、Kubernetes からプルされます。このビルドシステムが侵害され、ビルドの一部として悪意のあるパッケージが注入された場合、Kubernetes はクラスタにイメージをプルしてそれを実行することになります。マルウェアが実行されたり、暗号通貨マイナーがインストールされたり、バックドアが仕込まれる可能性があります。
 
 ## 参考資料
+Admission Controllers: [https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/)
 
-[https://www.openpolicyagent.org/](https://www.openpolicyagent.org/)
-[https://kyverno.io/](https://kyverno.io/)
+Co-Sign: [https://github.com/sigstore/cosign](https://github.com/sigstore/cosign)
 
-[https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/)
-[https://owasp.org/www-project-cyclonedx/https://owasp.org/www-project-cyclonedx/](https://owasp.org/www-project-cyclonedx/https://owasp.org/www-project-cyclonedx/)
-[https://github.com/sigstore/cosign](https://github.com/sigstore/cosign)
-[https://github.com/docker-slim/docker-slim](https://github.com/docker-slim/docker-slim)
+CycloneDX: [https://owasp.org/www-project-cyclonedx/https://owasp.org/www-project-cyclonedx/](https://owasp.org/www-project-cyclonedx/https://owasp.org/www-project-cyclonedx/)
+
+Docker Slim: [https://github.com/docker-slim/docker-slim](https://github.com/docker-slim/docker-slim)
+
+Open Policy Agent: [https://www.openpolicyagent.org/](https://www.openpolicyagent.org/)
