@@ -39,7 +39,7 @@ Open Policy Agent Gatekeeper, Kyverno, Kubewarden などの他の OSS プロジ�
 ## 攻撃シナリオの例
 例 #1: コンテナブレイクアウト 1 ライナー
 
-Kubernetes API に対して以下のコマンドを実行すると、高い権限があるコンテナを実行する非常に特殊な pod を作成します。まず `"hostPID": true` を見ます。これはコンテナの最も基本的な分離を解除し、すべてのプロセスがホスト上にあるかのように見ることができるようにするものです。`nsenter` コマンドはホストの `mount` 名前空間にある `pid 1` が動作している別の `mount` 名前空間に切り替わります。最後に、ワークロードが `priviliged` であることを確認し、パーミッションエラーを防ぐことができます。流行しています。コンテナブレイクアウトの [ツイート](https://twitter.com/mauilion/status/1129468485480751104https://twitter.com/mauilion/status/1129468485480751104) です！
+Kubernetes API に対して以下のコマンドを実行すると、高い権限があるコンテナを実行する非常に特殊な pod を作成します。まず `"hostPID": true` を見ます。これはコンテナの最も基本的な分離を解除し、すべてのプロセスがホスト上にあるかのように見ることができるようにするものです。`nsenter` コマンドはホストの `mount` 名前空間にある `pid 1` が動作している別の `mount` 名前空間に切り替わります。最後に、ワークロードが `priviliged` であることを確認し、パーミッションエラーを防ぐことができます。流行しています。コンテナブレイクアウトの [ツイート](https://twitter.com/mauilion/status/1129468485480751104) です！
 
 ```
  kubectl run r00t --restart=Never -ti --rm --image lol \
