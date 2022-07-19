@@ -10,8 +10,7 @@ Service Account, User, Group などの subject が `cluster-admin` と呼ばれ�
 
 以下はある有名な OSS Kubernetes 開発プラットフォームの RBAC 設定です。これは `default` サービスアカウントにバインドされている非常に危険な `ClusterRoleBinding` を示しています。なぜこれが危険なのでしょうか？これは `default` 名前空間にあるすべての Pod に非常に強力な `cluster-admin` 権限を付与します。デフォルト名前空間の pod が侵害された場合 (リモートコード実行を考えてみてください) 、攻撃者がサービスになりすましてクラスタ全体を侵害することは簡単なことなのです。
 
-```jsx
-
+```yaml
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
@@ -43,7 +42,7 @@ roleRef:
 
 この架空のツールは以下の RBAC 設定を使用しています。
 
-```jsx
+```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
