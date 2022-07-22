@@ -35,7 +35,7 @@ spec:
 
 ***サービスメッシュ:*** さまざまなユースケースに対して [Istio](https://istio.io/), [Linkerd](https://linkerd.io/), [Hashicorp Consul](https://www.consul.io/docs/k8s) などの数多くのさまざまなサービスメッシュプロジェクトが利用可能です。これらのサービスメッシュテクノロジはそれぞれ Kubernetes クラスタ内のネットワークトラフィックをセグメント化するさまざまな方法を提供し、すべてに長所と短所があります。以下は Istio の `AuthorizationPolicy` の例です。
 
-```
+```yaml
 apiVersion: "security.istio.io/v1beta1"
 kind: "AuthorizationPolicy"
 metadata:
