@@ -9,7 +9,7 @@ Kubernetes コアコンポーネントの設定ミスはクラスタの完全な
 
 匿名認証では Kubelet への非認証リクエストを許可します。Kubelet の設定をチェックし、以下のフラグが **false** に設定されていることを確認してください。
 
-```jsx
+```bash
 #bad
 --anonymous-auth=true
 #good
@@ -18,7 +18,7 @@ Kubernetes コアコンポーネントの設定ミスはクラスタの完全な
 
 Kubelets と通信する際は常に Authorization チェックを行うべきです。Authorization モードを設定して、明示的に非認可リクエストを許可することが可能です。Kubelet 設定でこのようなことがないように以下を点検してください。モードは **AlwaysAllow** 以外に設定すべきです。
 
-```jsx
+```bash
 #bad
 --authorization-mode=AlwaysAllow
 #good
