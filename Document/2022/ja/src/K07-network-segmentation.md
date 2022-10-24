@@ -70,6 +70,27 @@ Wordpress ポッドはネットワークセグメンテーションがないク�
 
 ロックダウンした `NetworkPolicy` やサービスメッシュ実装では Wordpress などから Redis へのネットワーク接続は不可能だったでしょう。
 
+ネットワークセグメンテーションがないクラスタ上でそれほど重要ではないウェブアプリケーションが侵害されます。攻撃者はメタデータ URL へのリクエストを行い、ブートストラッププロセスのすべての詳細を持つ証明書鍵を含む kube-env ファイルを取得できます。この攻撃は自分自身をノードとして登録し、さらなるエスカレーションのためにシークレットを盗む可能性があります。
+
+以下に記載したシンプルな `NetworkPolicy` でユーザーがメタデータ URL を呼び出すことをブロックできます。
+
+```
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: block-1
+spec:
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except:
+        - 169.254.169.254/32
+  podSelector: {}
+  policyTypes:
+  - Egress
+```
+
 ## 参考資料
 
 Istio Authorization: [https://istiobyexample.dev/authorization/](https://istiobyexample.dev/authorization/)
@@ -77,3 +98,5 @@ Istio Authorization: [https://istiobyexample.dev/authorization/](https://istioby
 Kubernetes CNI Explained: [https://www.tigera.io/learn/guides/kubernetes-networking/kubernetes-cni/](https://www.tigera.io/learn/guides/kubernetes-networking/kubernetes-cni/)
 
 Kubernetes Network Policies: [https://kubernetes.io/docs/concepts/services-networking/network-policies/](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+
+Hacking kubelet on GKE: [https://www.4armed.com/blog/hacking-kubelet-on-gke/](https://www.4armed.com/blog/hacking-kubelet-on-gke/)
