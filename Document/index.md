@@ -27,10 +27,10 @@ pitch: OWASP Top Ten for Kubernetes へようこそ
 
 
 ## 参加するには
-開発、問題、議論はすべて OWASP Top Ten [Github](https://github.com/OWASP/www-project-kubernetes-top-ten) リポジトリで行われます。会話に参加しましょう！
+開発、問題、議論はすべて OWASP Top Ten [GitHub](https://github.com/OWASP/www-project-kubernetes-top-ten) リポジトリで行われます。会話に参加しましょう！
 
 ## ライセンス
 The Kubernetes OWASP Top 10 document is licensed under the CC BY-NC-SA 4.0, the Creative Commons Attribution-ShareAlike 4.0 license. Some rights reserved.
 
 ## プロジェクトリーダー
-- [Jimmy Mesta](https://twitter.com/jimmesta) 
+- [Jimmy Mesta](https://twitter.com/jimmesta)
