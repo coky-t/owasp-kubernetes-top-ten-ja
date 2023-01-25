@@ -24,7 +24,7 @@
 
 ## 参加しよう！
 
-このドキュメントの開発は [Github](https://github.com/OWASP/www-project-kubernetes-top-ten) のソースリポジトリ内で行われます。
+このドキュメントの開発は [GitHub](https://github.com/OWASP/www-project-kubernetes-top-ten) のソースリポジトリ内で行われます。
 
 * Kubernetes の脆弱性や設定ミスのデータを提供していただける組織や個人を積極的に募集しています。
 * 翻訳作業
