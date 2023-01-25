@@ -12,7 +12,7 @@
 
 ## 防止方法
 
-**イメージの完全性:** コンテナイメージは製作者から使用者に渡される一連のソフトウェア成果物およびメタデータと考えることができます。このハンドオフは開発者の IDE から直接 Kubernetes クラスタに渡すような単純なものから、多段階の専用 CI/CD ワークフローのような複雑なものまであります。ソフトウェアの完全性は各フェーズを通じて検証する必要があります。
+**イメージの完全性:** コンテナイメージは製作者から使用者に渡される一連のソフトウェア成果物およびメタデータと考えることができます。このハンドオフは開発者の IDE から直接 Kubernetes クラスタに渡すような単純なものから、多段階の専用 CI/CD ワークフローのような複雑なものまであります。ソフトウェアの完全性は各フェーズを通じて [in-toto](https://in-toto.io/) [attestations](https://github.com/in-toto/attestation) を使用して検証する必要があります。これによりビルドパイプラインの [SLSA](https://slsa.dev) レベルも向上します。SLSA レベルが高いほど、より耐性のあるビルドパイプラインであることを示します。
 
 **ソフトウェア部品表 (Software Bill of Materials, SBOM)**: SBOM は特定のソフトウェア成果物に含まれるソフトウェアパッケージ、ライセンス、ライブラリのリストを提供し、他のセキュリティチェックの出発点として使用されるべきものです。SBOM 生成のもっとも一般的なオープンスタンダードは [CycloneDX](https://cyclonedx.org/) と [SPDX](https://spdx.dev/) の二つです。
 
@@ -45,3 +45,7 @@ CycloneDX: [https://owasp.org/www-project-cyclonedx/](https://owasp.org/www-proj
 Docker Slim: [https://github.com/docker-slim/docker-slim](https://github.com/docker-slim/docker-slim)
 
 Open Policy Agent: [https://www.openpolicyagent.org/](https://www.openpolicyagent.org/)
+
+in-toto: [https://in-toto.io](https://in-toto.io)
+
+SLSA: [https://slsa.dev](https://slsa.dev)
