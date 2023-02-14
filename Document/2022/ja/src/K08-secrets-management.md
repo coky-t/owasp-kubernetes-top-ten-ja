@@ -1,6 +1,7 @@
 ## 概要
 Kubernetes では、シークレットはパスワードやトークンなどの機密データを含む小さなオブジェクトです。認証情報や鍵などの機密データをどのように保存しアクセスするかを評価する必要があります。シークレットは Kubernetes エコシステムにおいて便利な機能ですが、取り扱いには細心の注意が必要です。
 
+![Secrets Management - Illustration](/assets/images/K08-2022.gif)
 
 ## 説明
 
@@ -38,6 +39,8 @@ RBAC 設定も同様にロックダウンすべきです。すべての Service 
 **ログ記録と監査を確実に実施する**
 
 Kubernetes クラスタはアクティビティに関する有用なメトリクスを生成し、シークレットへのアクセスを含む悪意のある動作や異常な動作を検出するのに役立ちます。 [Kubernetes Audit](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/) レコードを有効に設定し、そのストレージを一元化してください。
+
+![Secrets Management - Mitigations](/assets/images/K08-2022-mitigation.gif)
 
 ## 攻撃シナリオの例
 

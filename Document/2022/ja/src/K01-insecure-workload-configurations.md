@@ -2,6 +2,8 @@
 
 Kubernetes におけるワークロードのセキュリティコンテキストは高度に設定できてしまうため、深刻なセキュリティの設定ミスが組織のワークロードやクラスタ全体に広がる可能性があります。Redhat が実施した [Kubernetes adoption, security, and market trends report 2022](https://www.redhat.com/en/resources/kubernetes-adoption-security-market-trends-overview) によると、回答者の 53% 近くが過去 12 か月間に Kubernetes 環境での設定ミスのインシデントを経験しています。
 
+![Insecure Workload Configuration - Illustration](/assets/images/K01-2022.gif)
+
 ## 説明
 
 Kubernetes マニフェストには特定のワークロードの信頼性、セキュリティ、スケーラビリティに影響を与える可能性のあるさまざまな設定が多く含まれています。これらの設定は継続的に監査し修正する必要があります。影響の大きいマニフェスト設定の例をいくつか以下に示します。
@@ -64,6 +66,10 @@ spec:
 3. AllowPrivilegeEscalation: False を設定して、子プロセスが親プロセスより高い権限を取得できないようにする
 
 Open Policy Agent などのツールは一般的な設定ミスを検出するポリシーエンジンとして使用できます。また Kubernetes 要の CIS ベンチマークも設定ミスを発見するための出発点として使用できます。
+
+
+![Insecure Workload Configuration - Mitigations](/assets/images/K01-2022-mitigation.gif)
+
 
 ### 攻撃シナリオの例
 

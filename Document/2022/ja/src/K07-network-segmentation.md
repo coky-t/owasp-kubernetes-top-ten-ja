@@ -1,6 +1,7 @@
 ## 概要
 複数のマイクロサービスやテナントで Kubernetes を運用する場合、重要な懸念事項はネットワークトラフィックのコントロールです。Kubernetes クラスタのコンテキスト内でトラフィックを分離することはポッド、名前空間、ラベルなどの間のいくつかのレベルで行われます。
 
+![Network Segmentation - Illustration](/assets/images/K07-2022.gif)
 
 ## 説明
 
@@ -63,6 +64,8 @@ spec:
 Container Network Interface (CNI) はネットワークリソースへのアクセスを設定するために使用されるオープンソース [仕様](http://github.com/containernetworking/cni) です。CNI は Kubernetes 内のネットワークアクセスを許可または拒否するためのソフトウェア定義のメカニズムであり、サポートされるプラグインは多岐にわたります。[Project Calico](https://www.tigera.io/project-calico/) や [Cilium](https://cilium.io/) などのソリューションはすべて Kubernetes のコンテキスト内でネットワークトラフィックを分離するためのさまざまなメカニズムを提供しています。オペレータが Kubernetes ネットワークポリシー (上記) を実装したい場合、一般的に CNI が必要となります。
 
 CNI を選択する場合には、セキュリティの観点から求めている機能セットと、そのプラグインを使用することに関連するリソースのオーバーヘッドとメンテナンスについて理解することが最も重要です。
+
+![Network Segmentation - Mitigation](/assets/images/K07-2022-mitigation.gif)
 
 ## 攻撃シナリオの例
 

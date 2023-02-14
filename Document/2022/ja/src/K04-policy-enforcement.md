@@ -2,6 +2,8 @@
 
 セキュリティポリシーを複数のクラスタ、クラウドに分散し施行すると、セキュリティチームはすぐにリスク許容度を管理できなくなります。設定ミスを一元的に検出、修正、防止できないと、クラスタが危険にさらされる可能性があります。
 
+![Policy Enforcement - Illustration](/assets/images/K04-2022.gif)
+
 ## 説明
 Kubernetes のポリシー施行はソフトウェアデリバリライフサイクルを通じていくつかの場所で行うことができ、また行うべきです。ポリシー施行によりセキュリティおよびコンプライアンスチームはマルチクラスタ／マルチクラウドインフラストラクチャ全体にガバナンス、コンプライアンス、セキュリティ要件を適用できます。
 
@@ -35,6 +37,8 @@ spec:
 ワークロードの設定ミスを検出するだけでは十分ではありません。チームは設定ミスのある Kubernetes オブジェクトをアドミッション時にブロックするという保証を必要としています。これは一般的に Kubernetes API 自体の [Admission Controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) によって処理されます。Kubernetes API 自体の一部として Pod Security Standards と呼ばれるビルトイン機能が存在し、クラスタ自体の [Pod Security Admission Controller](https://kubernetes.io/docs/concepts/security/pod-security-admission/) の一部としてポリシーを施行します。Privileged, Baseline, Restricted の三つのモードが用意されています。
 
 Open Policy Agent Gatekeeper, Kyverno, Kubewarden などの他の OSS プロジェクトも同様に、クラスタ上で設定ミスのある pod がスケジュールされることを防ぐポリシー施行機能を提供しています。
+
+![Policy Enforcement - Mitigations](/assets/images/K04-2022-mitigation.gif)
 
 ## 攻撃シナリオの例
 例 #1: コンテナブレイクアウト 1 ライナー

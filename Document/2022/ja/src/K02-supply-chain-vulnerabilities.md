@@ -2,6 +2,8 @@
 
 コンテナは開発ライフサイクルのサプライチェーンのさまざまな段階において多くの形態をとり、それぞれが個別のセキュリティ課題を提示しています。単一のコンテナだけでも何百ものサードパーティコンポーネントや依存関係を持つことがあり、各段階での起源の信頼性を確保することは非常に困難です。これらの課題にはイメージの完全性、イメージの構成、既知のソフトウェア脆弱性などがありますが、これらに限定されるものではありません。
 
+![Supply Chain Vulnerabilities - Illustration](/assets/images/K02-2022.gif)
+
 ## 説明
 
 **イメージの完全性:** [Solarwinds 事件](https://www.businessinsider.com/solarwinds-hack-explained-government-agencies-cyber-security-2020-12) やさまざまな [汚染されたサードパーティパッケージ](https://therecord.media/malware-found-in-npm-package-with-millions-of-weekly-downloads/) などの出来事によりソフトウェアの来歴がメディアで最近大きな関心を集めています。これらのサプライチェーンのリスクは Kubernetes 内部での実行時だけでなく、コンテナビルドサイクルのさまざまな場面で表面化する可能性があります。コンテナイメージの内容に関する記録システムが存在しない場合、予期しないコンテナがクラスタで実行される可能性があります。
@@ -28,6 +30,8 @@
 - 明示的に許可されていないベースイメージを使用している
 - 承認済み SBOM を含んでいない
 - 信頼できないレジストリを元としている
+
+![Supply Chain Vulnerabilities - Mitigations](/assets/images/K02-2022-mitigation.gif)
 
 ## 攻撃シナリオの例
 
