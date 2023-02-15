@@ -8,7 +8,7 @@
 
 ### 目次
 
-* K00:2022 [Kubernetes Security Top Ten へようこそ](2022/ja/src/K00-introduction.md)
+* K00:2022 [Kubernetes Security Top Ten へようこそ](2022/ja/src/index.md)
 * K01:2022 [安全でないワークロード設定](2022/ja/src/K01-insecure-workload-configurations.md)
 * K02:2022 [サプライチェーンの脆弱性](2022/ja/src/K02-supply-chain-vulnerabilities.md)
 * K03:2022 [過度に許可を与える RBAC 設定](2022/ja/src/K03-overly-permissive-rbac.md)
