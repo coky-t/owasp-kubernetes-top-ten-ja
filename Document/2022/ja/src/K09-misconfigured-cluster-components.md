@@ -1,3 +1,9 @@
+---
+
+layout: col-sidebar
+title: "K09: クラスタコンポーネントの設定ミス (Misconfigured Cluster Components)"
+---
+
 ## 概要
 Kubernetes クラスタは etcd 内の Key-Value ストレージ、kube-apiserver、kubelet など、数多くのさまざまなコンポーネントから侵害されます。これらのコンポーネントはそれぞれ高度に設定可能であり、重要なセキュリティ責任を担っています。
 

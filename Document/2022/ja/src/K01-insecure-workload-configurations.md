@@ -1,3 +1,9 @@
+---
+
+layout: col-sidebar
+title: "K01: 安全でないワークロード設定 (Insecure Workload Configurations)"
+---
+
 ## 概要
 
 Kubernetes におけるワークロードのセキュリティコンテキストは高度に設定できてしまうため、深刻なセキュリティの設定ミスが組織のワークロードやクラスタ全体に広がる可能性があります。Redhat が実施した [Kubernetes adoption, security, and market trends report 2022](https://www.redhat.com/en/resources/kubernetes-adoption-security-market-trends-overview) によると、回答者の 53% 近くが過去 12 か月間に Kubernetes 環境での設定ミスのインシデントを経験しています。
@@ -67,15 +73,13 @@ spec:
 
 Open Policy Agent などのツールは一般的な設定ミスを検出するポリシーエンジンとして使用できます。また Kubernetes 要の CIS ベンチマークも設定ミスを発見するための出発点として使用できます。
 
-
 ![Insecure Workload Configuration - Mitigations](/assets/images/K01-2022-mitigation.gif)
 
-
-### 攻撃シナリオの例
+## 攻撃シナリオの例
 
 TODO
 
-### 参考資料
+## 参考資料
 
 CIS Benchmarks for Kubernetes: [https://www.cisecurity.org/benchmark/kubernetes](https://www.cisecurity.org/benchmark/kubernetes)
 

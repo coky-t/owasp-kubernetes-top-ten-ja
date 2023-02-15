@@ -1,3 +1,9 @@
+---
+
+layout: col-sidebar
+title: "K03: 過度に許可を与える RBAC 設定 (Overly Permissive RBAC)"
+---
+
 ## 概要
 [ロールベースのアクセス制御](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) (Role-Based Access Control, RBAC) は Kubernetes の主要な認可メカニズムで、リソースに対するパーミッションを担っています。これらのパーミッションは動詞 (get, create, delete など) とリソース (pods, services, nodes など) を組み合わせ、名前空間やクラスタスコープにできます。クライアントが実施したいアクションに応じて適切なデフォルトの責任分担を備えている、すぐに使えるロールのセットを提供しています。最小権限の適用で RBAC を設定することは後述の理由により簡単ではありません。
 
@@ -6,7 +12,7 @@
 ## 説明
 RBAC は適切に設定された場合、Kubernetes の非常に強力なセキュリティ施行メカニズムですが、侵害が発生した場合にはすぐにクラスタの大きなリスクとなり、被害範囲が拡大する可能性があります。以下は RBAC の設定ミスの例です。
 
-### `cluster-admin` の不要な使用
+## `cluster-admin` の不要な使用
 
 Service Account, User, Group などの subject が `cluster-admin` と呼ばれるビルトインの Kubernetes "supreuser" にアクセスできる場合、クラスタ内のあらゆるリソースに対してあらゆるアクションを実施できます。このレベルのパーミッションはクラスタ全体のすべてのリソースを完全に制御することを許可する `ClusterRoleBinding` で使用されると特に危険です。また `cluster-admin` は `RoleBinding` で使用できますが、これも重大な危険をもたらす可能性があります。
 
@@ -27,7 +33,7 @@ roleRef:
  apiGroup: rbac.authorization.k8s.io
 ```
 
-#### 防止方法
+### 防止方法
 
 攻撃者が RBAC 設定を悪用するリスクを減らすには、設定を継続的に分析し、最小権限の原則が常に適用されていることを確認することが重要です。推奨事項をいくつか以下に示します。
 
@@ -39,7 +45,7 @@ roleRef:
 - `RoleBindings` を利用するには、クラスタ全体の RBAC ポリシーではなく、特定の名前空間にパーミッションの範囲を制限する
 - Kubernetes ドキュメントにある公式の [RBAC Good Practices](https://kubernetes.io/docs/concepts/security/rbac-good-practices/) に従う
 
-#### 攻撃シナリオの例
+### 攻撃シナリオの例
 プラットフォームエンジニアリングチームがプライベート Kubernetes OSS クラスタ内にクラスタ観測ツールをインストールしたとします。このツールはトラフィックをデバッグおよび分析するためのウェブ UI が含まれています。UI は含まれているサービスマニフェストを通じてインターネットに公開されます。type: LoadBalancer を使用しており、AWS ALB ロードバランサを **パブリック** IP アドレスで起動します。
 
 この架空のツールは以下の RBAC 設定を使用しています。
@@ -62,7 +68,7 @@ subjects:
 
 攻撃者はオープンなウェブ UI を見つけ、クラスタ内の実行中のコンテナ上でシェルを取得できます。`prd` 名前空間のデフォルトサービスアカウントトークンがウェブ UI で使用されており、攻撃者はそれになりすまして Kubernetes API を呼び出し、`kube-system` 名前空間の `describe secrets` などの特権アクションを実施できます。これは `roleRef` によってそのサービスアカウントにクラスタ全体でビルトイン権限の `admin` が与えられているためです。
 
-#### 参考資料
+### 参考資料
 
 Kubernetes RBAC: <https://kubernetes.io/docs/reference/access-authn-authz/rbac/>
 
@@ -78,10 +84,10 @@ kubectl はオブジェクト名のみを表示するような選択となるよ
 
 
 
-#### 防止方法
+### 防止方法
 `LIST` パーミッションはそのアカウントにそのリソースのすべてを `GET` することを許可している場合にのみ付与してください。
 
-#### 攻撃シナリオの例
+### 攻撃シナリオの例
 
 ```bash
 
@@ -132,21 +138,22 @@ kubectl delete secret abc
 kill "%$(jobs | grep "kubectl proxy" | cut -d [ -f 2| cut -d ] -f 1)"
 ```
 
-#### 参考資料
+### 参考資料
 Why list is a scary permission on k8s: <https://tales.fromprod.com/2022/202/Why-Listing-Is-Scary_On-K8s.html>
 Kubernetes security recommendations for developers: <https://kubernetes.io/docs/concepts/configuration/secret/#security-recommendations-for-developers>
 
-### `WATCH`パーミッションの不要な使用
+## `WATCH`パーミッションの不要な使用
 
 ウォッチのレスポンスには更新された際にそれらの名前だけではなくすべてのアイテムが完全に含まれています。 `WATCH` パーミッションを持つアカウントは API から特定の値を取得したり、すべてのアイテムをリストすることはできませんが、ウォッチ呼び出し中にはすべてのアイテムを完全に取得し、ウォッチが中断されなければ新しいアイテムもすべて取得します。
 
 
-#### 防止方法
+### 防止方法
 `WATCH` パーミッションはそのアカウントにそのリソースのすべてを `GET` および `LIST` することを許可している場合にのみ付与してください。
 
 ![Overly Permissive RBAC - Mitigations](/assets/images/K03-2022-mitigation.gif)
 
-#### 攻撃シナリオの例
+### 攻撃シナリオの例
+
 ```bash
 
 # Create example A, which can only watch secrets in the default namespace
@@ -246,5 +253,5 @@ kubectl delete secret abcd
 kill "%$(jobs | grep "kubectl proxy" | cut -d [ -f 2| cut -d ] -f 1)"
 ```
 
-#### 参考資料
+### 参考資料
 Kubernetes security recommendations for developers: <https://kubernetes.io/docs/concepts/configuration/secret/#security-recommendations-for-developers>

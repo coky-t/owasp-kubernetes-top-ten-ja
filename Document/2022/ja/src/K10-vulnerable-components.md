@@ -1,3 +1,9 @@
+---
+
+layout: col-sidebar
+title: "K10: 古くて脆弱な Kubernetes コンポーネント (Vulnerable Components)"
+---
+
 ## 概要
 Kubernetes には脆弱性が存在します。CVE データベース、開示、更新を注意深く追跡し、パッチ管理の計画を立てるのは管理者の責任です。
 
