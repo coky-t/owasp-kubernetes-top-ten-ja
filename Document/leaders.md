@@ -1,2 +1,2 @@
 ### リーダー
-* [Jimmy Mesta](mailto:jimmy@ksoc.com)
+* [Jimmy Mesta, Co-founder & CTO at KSOC](mailto:jimmy@ksoc.com)
