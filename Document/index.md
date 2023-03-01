@@ -33,4 +33,4 @@ pitch: OWASP Top Ten for Kubernetes へようこそ
 The Kubernetes OWASP Top 10 document is licensed under the CC BY-NC-SA 4.0, the Creative Commons Attribution-ShareAlike 4.0 license. Some rights reserved.
 
 ## プロジェクトリーダー
-- [Jimmy Mesta](https://twitter.com/jimmesta) 
+- [Jimmy Mesta, Co-founder & CTO at KSOC](https://twitter.com/jimmesta) 
