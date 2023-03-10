@@ -13,6 +13,10 @@ This is the unofficial Japanese translation of the [OWASP Kubernetes Top Ten](ht
 * [リーダー](Document/leaders.md)
 * [OWASP Kubernetes Top 10](Document/README.md)
 
+## License
+
+[Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/)
+
 ## Author (日本語訳)
 
 [Koki Takeyama](https://github.com/coky-t)
