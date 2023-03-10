@@ -8,7 +8,7 @@ title: "K05: 不十分なログ記録と監視 (Inadequate Logging)"
 
 Kubernetes 環境は多くのさまざまなコンポーネントからさまざまなレベルのログを生成する機能を備えています。ログがキャプチャ、保存、アクティブに監視されていない場合、攻撃者はほとんど検出されないまま脆弱性を悪用する可能性があります。ログ記録や監視が行われないことで、インシデント調査やレスポンス作業にも支障が生じます。
 
-![Inadequate Logging - Illustration](/assets/images/K05-2022.gif)
+![Inadequate Logging - Illustration](../../../assets/images/K05-2022.gif)
 
 ## 説明
 
@@ -42,7 +42,7 @@ AWS, Azure, GCP などのマネージド Kubernetes プロバイダはクラウ�
 
 上記のように、Kubernetes エコシステム内で利用可能なログ記録メカニズムには事欠きません。堅牢なセキュリティログ記録アーキテクチャは関連するセキュリティイベントをキャプチャするだけでなく、クエリ可能で、長期的で、完全性を維持する方法で一元化される必要があります。
 
-![Inadequate Logging - Mitigations](/assets/images/K05-2022-mitigation.gif)
+![Inadequate Logging - Mitigations](../../../assets/images/K05-2022-mitigation.gif)
 
 ## 攻撃シナリオの例
 

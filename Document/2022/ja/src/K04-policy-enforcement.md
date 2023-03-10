@@ -8,7 +8,7 @@ title: "K04: 一元化されたポリシー施行の欠如 (Policy Enforcement)"
 
 セキュリティポリシーを複数のクラスタ、クラウドに分散し施行すると、セキュリティチームはすぐにリスク許容度を管理できなくなります。設定ミスを一元的に検出、修正、防止できないと、クラスタが危険にさらされる可能性があります。
 
-![Policy Enforcement - Illustration](/assets/images/K04-2022.gif)
+![Policy Enforcement - Illustration](../../../assets/images/K04-2022.gif)
 
 ## 説明
 Kubernetes のポリシー施行はソフトウェアデリバリライフサイクルを通じていくつかの場所で行うことができ、また行うべきです。ポリシー施行によりセキュリティおよびコンプライアンスチームはマルチクラスタ／マルチクラウドインフラストラクチャ全体にガバナンス、コンプライアンス、セキュリティ要件を適用できます。
@@ -44,7 +44,7 @@ spec:
 
 Open Policy Agent Gatekeeper, Kyverno, Kubewarden などの他の OSS プロジェクトも同様に、クラスタ上で設定ミスのある pod がスケジュールされることを防ぐポリシー施行機能を提供しています。
 
-![Policy Enforcement - Mitigations](/assets/images/K04-2022-mitigation.gif)
+![Policy Enforcement - Mitigations](../../../assets/images/K04-2022-mitigation.gif)
 
 ## 攻撃シナリオの例
 例 #1: コンテナブレイクアウト 1 ライナー

@@ -7,7 +7,7 @@ title: "K03: 過度に許可を与える RBAC 設定 (Overly Permissive RBAC)"
 ## 概要
 [ロールベースのアクセス制御](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) (Role-Based Access Control, RBAC) は Kubernetes の主要な認可メカニズムで、リソースに対するパーミッションを担っています。これらのパーミッションは動詞 (get, create, delete など) とリソース (pods, services, nodes など) を組み合わせ、名前空間やクラスタスコープにできます。クライアントが実施したいアクションに応じて適切なデフォルトの責任分担を備えている、すぐに使えるロールのセットを提供しています。最小権限の適用で RBAC を設定することは後述の理由により簡単ではありません。
 
-![Overly Permissive RBAC - Illustration](/assets/images/K03-2022.gif)
+![Overly Permissive RBAC - Illustration](../../../assets/images/K03-2022.gif)
 
 ## 説明
 RBAC は適切に設定された場合、Kubernetes の非常に強力なセキュリティ施行メカニズムですが、侵害が発生した場合にはすぐにクラスタの大きなリスクとなり、被害範囲が拡大する可能性があります。以下は RBAC の設定ミスの例です。
@@ -150,7 +150,7 @@ Kubernetes security recommendations for developers: <https://kubernetes.io/docs/
 ### 防止方法
 `WATCH` パーミッションはそのアカウントにそのリソースのすべてを `GET` および `LIST` することを許可している場合にのみ付与してください。
 
-![Overly Permissive RBAC - Mitigations](/assets/images/K03-2022-mitigation.gif)
+![Overly Permissive RBAC - Mitigations](../../../assets/images/K03-2022-mitigation.gif)
 
 ### 攻撃シナリオの例
 

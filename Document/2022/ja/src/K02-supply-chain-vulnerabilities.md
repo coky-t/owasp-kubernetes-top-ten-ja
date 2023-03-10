@@ -8,7 +8,7 @@ title: "K02: サプライチェーンの脆弱性 (Supply Chain Vulnerabilities)
 
 コンテナは開発ライフサイクルのサプライチェーンのさまざまな段階において多くの形態をとり、それぞれが個別のセキュリティ課題を提示しています。単一のコンテナだけでも何百ものサードパーティコンポーネントや依存関係を持つことがあり、各段階での起源の信頼性を確保することは非常に困難です。これらの課題にはイメージの完全性、イメージの構成、既知のソフトウェア脆弱性などがありますが、これらに限定されるものではありません。
 
-![Supply Chain Vulnerabilities - Illustration](/assets/images/K02-2022.gif)
+![Supply Chain Vulnerabilities - Illustration](../../../assets/images/K02-2022.gif)
 
 ## 説明
 
@@ -37,7 +37,7 @@ title: "K02: サプライチェーンの脆弱性 (Supply Chain Vulnerabilities)
 - 承認済み SBOM を含んでいない
 - 信頼できないレジストリを元としている
 
-![Supply Chain Vulnerabilities - Mitigations](/assets/images/K02-2022-mitigation.gif)
+![Supply Chain Vulnerabilities - Mitigations](../../../assets/images/K02-2022-mitigation.gif)
 
 ## 攻撃シナリオの例
 

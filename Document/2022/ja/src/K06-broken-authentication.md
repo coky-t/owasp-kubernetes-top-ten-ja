@@ -7,12 +7,12 @@ title: "K06: 認証メカニズムの不備 (Broken Authentication)"
 ## 概要
 Kubernetes の認証は多くの形態を取り、非常に柔軟です。このように高度に設定可能であることを重視しているため、Kubernetes は多くのさまざまな環境で動作しますが、クラスタやクラウドセキュリティ体勢に関して課題もあります。
 
-![Broken Authentication - Illustration](/assets/images/K06-2022.gif)
+![Broken Authentication - Illustration](../../../assets/images/K06-2022.gif)
 
 ## 説明
 Kubernetes API にアクセスするために必要なエンティティがいくつかあります。認証はこれらのリクエストの最初のハードルです。Kubernetes API への認証は HTTP リクエストを介して行われ、認証方式はクラスタごとに異なります。リクエストが認証できない場合、HTTP ステータス 401 で拒否されます。
 
-![Kubernetes Authentication](/assets/images/kubernetes-auth.png)
+![Kubernetes Authentication](../../../assets/images/kubernetes-auth.png)
 
 入手元: [https://kubernetes.io/docs/concepts/security/controlling-access/](https://kubernetes.io/docs/concepts/security/controlling-access/)
 
@@ -37,7 +37,7 @@ Kubernetes API への認証が必要なさまざまなタイプの subject に�
 
 ***ユーザーと外部サービスには短期間有効なトークンを使用して認証する:*** すべての認証トークンは許容範囲内で短期間有効であるべきです。このようにすれば、認証情報が漏洩した場合でも、アカウントを侵害するために必要な時間内にリプレイできない可能性があります。
 
-![Broken Authentication - Mitigations](/assets/images/K06-2022-mitigation.gif)
+![Broken Authentication - Mitigations](../../../assets/images/K06-2022-mitigation.gif)
 
 ## 攻撃シナリオの例
 

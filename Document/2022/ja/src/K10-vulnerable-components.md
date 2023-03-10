@@ -7,7 +7,7 @@ title: "K10: 古くて脆弱な Kubernetes コンポーネント (Vulnerable Com
 ## 概要
 Kubernetes には脆弱性が存在します。CVE データベース、開示、更新を注意深く追跡し、パッチ管理の計画を立てるのは管理者の責任です。
 
-![Vulnerable Components - Illustration](/assets/images/K10-2022.gif)
+![Vulnerable Components - Illustration](../../../assets/images/K10-2022.gif)
 
 ## 説明
 
@@ -31,7 +31,7 @@ Kubernetes クラスタ内で動作しているサードパーティソフトウ
 
 **サードパーティの依存関係を最小限に抑える:** 過度に寛容な RBAC、低レベルのカーネルアクセス、過去の脆弱性開示記録について、デプロイメント前にすべてのサードパーティソフトウェアを個別に監査すべきです。
 
-![Vulnerable Components - Mitigations](/assets/images/K10-2022-mitigation.gif)
+![Vulnerable Components - Mitigations](../../../assets/images/K10-2022-mitigation.gif)
 
 ## 攻撃シナリオの例
 

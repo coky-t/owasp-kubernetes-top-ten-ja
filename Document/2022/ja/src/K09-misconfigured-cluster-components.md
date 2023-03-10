@@ -7,7 +7,7 @@ title: "K09: クラスタコンポーネントの設定ミス (Misconfigured Clu
 ## 概要
 Kubernetes クラスタは etcd 内の Key-Value ストレージ、kube-apiserver、kubelet など、数多くのさまざまなコンポーネントから侵害されます。これらのコンポーネントはそれぞれ高度に設定可能であり、重要なセキュリティ責任を担っています。
 
-![Misconfigured Cluster Components - Illustration](/assets/images/K09-2022.gif)
+![Misconfigured Cluster Components - Illustration](../../../assets/images/K09-2022.gif)
 
 ## 説明
 
@@ -40,7 +40,7 @@ Kubelets と通信する際は常に Authorization チェックを行うべき�
 
 実行できる簡単なセキュリティチェックは API サーバー自体のインターネットアクセシビリティを検査することです。最近の [ニュース](https://www.bleepingcomputer.com/news/security/over-900-000-kubernetes-instances-found-exposed-online/) に見られるように、 Kubernetes API をパブリックネットワークから切り離すことが推奨されています。
 
-![Misconfigured Cluster Components - Mitigations](/assets/images/K09-2022-mitigation.gif)
+![Misconfigured Cluster Components - Mitigations](../../../assets/images/K09-2022-mitigation.gif)
 
 ## 防止方法
 

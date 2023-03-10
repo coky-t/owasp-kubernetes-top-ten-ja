@@ -7,7 +7,7 @@ title: "K07: ネットワークセグメンテーションコントロールの�
 ## 概要
 複数のマイクロサービスやテナントで Kubernetes を運用する場合、重要な懸念事項はネットワークトラフィックのコントロールです。Kubernetes クラスタのコンテキスト内でトラフィックを分離することはポッド、名前空間、ラベルなどの間のいくつかのレベルで行われます。
 
-![Network Segmentation - Illustration](/assets/images/K07-2022.gif)
+![Network Segmentation - Illustration](../../../assets/images/K07-2022.gif)
 
 ## 説明
 
@@ -71,7 +71,7 @@ Container Network Interface (CNI) はネットワークリソースへのアク�
 
 CNI を選択する場合には、セキュリティの観点から求めている機能セットと、そのプラグインを使用することに関連するリソースのオーバーヘッドとメンテナンスについて理解することが最も重要です。
 
-![Network Segmentation - Mitigation](/assets/images/K07-2022-mitigation.gif)
+![Network Segmentation - Mitigation](../../../assets/images/K07-2022-mitigation.gif)
 
 ## 攻撃シナリオの例
 
