@@ -4,4 +4,5 @@ layout: col-sidebar
 title: "Top 10 Kubernetes リスク"
 ---
 
-# OWASP Kubernetes Top Ten へようこそ！
+<!-- markdownlint-disable-next-line MD025 -->
+# OWASP Kubernetes Top Ten へようこそ
