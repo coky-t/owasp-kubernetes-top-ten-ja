@@ -68,8 +68,17 @@ SA はシンプルな認証メカニズムで、一般的にはクラスタの *
 
 ### クラスタ外からサービスアカウントトークンを使用しない
 
-SA はグループにバインドできず、有効期限もありません。
-クラスタの外部から長期間有効な SA を使用すると、クラスタが重大なリスクにさらされます。
+クラスタ内で使用する場合、Kubernetes Service Account トークンは TokenRequest API を使用して直接取得され、投影ボリュームを使用して Pod にマウントされます。
+クラスタ外で使用する場合、これらのトークンは [Kubernetes Secret](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#manually-create-a-long-lived-api-token-for-a-serviceaccount) を介して手動でプロビジョンする必要があり、有効期限はありません。
+クラスタ外から有効期間の長い SA トークンを使用すると、クラスタを重大なリスクにさらすことになります。
+
+
+
+
+トークンベースのアプローチが必要な場合は、[TokenRequest API](https://kubernetes.io/docs/reference/kubernetes-api/authentication-resources/token-request-v1/) または [`kubectl create token` を `--duration` フラグとともに](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) 使用して、有効期間の短いトークンをプロビジョンできます。
+
+
+
 
 ### ユーザーと外部サービスには短期間有効なトークンを使用して認証する
 
