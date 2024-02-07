@@ -60,7 +60,7 @@ metadata:
   name: read-only-fs
 spec:  
   containers:  
-
+  ...
   securityContext:  
     #read-only fs explicitly defined
     readOnlyRootFilesystem: true
@@ -89,6 +89,32 @@ spec:
     privileged: false
 ```
 
+**リソース制約を強制すべきである**: デフォルトでは、コンテナは Kubernetes クラスタ上の無制限のコンピュータリソースで実行します。
+CPU リクエストと制限は Pod 内の個々のコンテナに帰属できます。
+コンテナは CPU 制限を指定しない場合、コンテナが消費できる CPU リソースに上限がないことを意味します。
+この柔軟性は好都合なこともありますが、コンテナがホスティングノード上で利用可能なすべての CPU リソースを利用する可能性があるため、クリプトマイニングなどの潜在的なリソース乱用のリスクももたらします。
+
+
+
+
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-limit-pod
+spec:
+  containers:
+  ...
+    resources:
+      limits:
+        cpu: "0.5" # 0.5 CPU cores
+        memory: "512Mi" # 512 Megabytes of memory
+      requests:
+        cpu: "0.2" # 0.2 CPU cores
+        memory: "256Mi" # 256 Megabytes of memory
+```
+
 ## 防止方法
 
 大規模で分散した Kubernetes 環境全体でセキュアな設定を維持することは、困難な作業となる可能性があります。
@@ -101,6 +127,8 @@ spec:
 1. 非 root ユーザーで実行する
 2. 非特権モードで実行する
 3. AllowPrivilegeEscalation: False を設定して、子プロセスが親プロセスより高い権限を取得できないようにする
+4. LimitRange を設定して、ネームスペース内の該当するオブジェクトの種類ごとにリソース割り当てを制限する
+
 
 
 Open Policy Agent などのツールは一般的な設定ミスを検出するポリシーエンジンとして使用できます。
