@@ -7,7 +7,7 @@ This is the unofficial Japanese translation of the [OWASP Kubernetes Top Ten](ht
 - Project Site - <https://owasp.org/www-project-kubernetes-top-ten/>
 - Project Repository - <https://github.com/OWASP/www-project-kubernetes-top-ten>
 
-# OWASP Kubernetes Top 10 日本語版
+## OWASP Kubernetes Top 10 日本語版
 
 * [概要](Document/index.md)
 * [リーダー](Document/leaders.md)
