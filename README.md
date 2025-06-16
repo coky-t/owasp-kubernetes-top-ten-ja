@@ -1,6 +1,9 @@
 # OWASP Kubernetes Top Ten ja
 
-This is the unofficial Japanese translation of the [OWASP Kubernetes Top Ten](https://owasp.org/www-project-kubernetes-top-ten/).
+This is the unofficial Japanese translation of the [OWASP Kubernetes Top Ten](https://github.com/OWASP/www-project-kubernetes-top-ten).
+
+- Document Site - <https://coky-t.gitbook.io/owasp-kubernetes-top-ten-ja/>
+- Document Repository - <https://github.com/coky-t/owasp-kubernetes-top-ten-ja>
 
 ### Originator
 
@@ -33,3 +36,6 @@ This is the unofficial Japanese translation of the [OWASP Kubernetes Top Ten](ht
 ## Translator (Japanese)
 
 [Koki Takeyama](https://github.com/coky-t)
+
+- Document Site - <https://coky-t.gitbook.io/owasp-docs-ja/>
+- Document Repository - <https://github.com/coky-t/owasp-docs-ja>
