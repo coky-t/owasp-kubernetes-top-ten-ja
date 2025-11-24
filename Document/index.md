@@ -14,9 +14,7 @@ pitch: OWASP Top Ten for Kubernetes へようこそ
 
 ## Top 10 Kubernetes リスク - 2025
 
-2025 年の Top 10 を更新中です。ご協力いただける場合は、以下の Google フォームにご記入ください。
-
-- [Top 10 2025 Survey](https://forms.gle/iUbTtvtmU7aCF6QZ6)
+2025 年の Top 10 を更新中です。更新をお待ちください。
 
 ## Top 10 Kubernetes リスク - 2022
 
