@@ -18,7 +18,7 @@ This is the unofficial Japanese translation of the [OWASP Kubernetes Top Ten](ht
 * [リーダー](Document/leaders.md)
 * [OWASP Kubernetes Top 10](Document/README.md)
 
-### OWASP Kubernetes Top 10 2025 日本語版 (ドラフト)
+### OWASP Kubernetes Top 10 2025 日本語版
 
 * K01:2025 [安全でないワークロード設定](Document/2025/ja/src/K01-Insecure-Workload-Configurations.md)
 * K02:2025 [過度に許可を与える認可設定](Document/2025/ja/src/K02-Overly-Permissive-Authorization-Configurations.md)
