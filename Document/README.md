@@ -6,9 +6,9 @@
 
 [Kubernetes](https://kubernetes.io) を採用すると、アプリケーションやインフラストラクチャに新たなリスクが発生します。*OWASP Kubernetes Top 10* はセキュリティ担当者、システム管理者、ソフトウェア開発者が Kubernetes エコシステムのリスクを優先順位付けできるようにすることを目的としています。Top 10 はこれらのリスクの優先順位付けされたリストです。将来的には成熟度や複雑度が異なる組織から収集したデータに裏打ちされることを期待しています。
 
-## ドラフト Top 10 Kubernetes リスク - 2025
+## Top 10 Kubernetes リスク - 2025
 
-ドラフト版 2025 Top 10 リスクを公開しました。フィードバックをお待ちしています。変更については issues または PR を開いてください。
+2025 Top 10 リスクを公開しました。フィードバックをお待ちしています。変更については issues または PR を開いてください。
 
 - [K01: 安全でないワークロード設定](./2025/ja/src/K01-Insecure-Workload-Configurations.md)
 - [K02: 過度に許可を与える認可設定](./2025/ja/src/K02-Overly-Permissive-Authorization-Configurations.md)
