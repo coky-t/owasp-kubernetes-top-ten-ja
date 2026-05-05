@@ -6,22 +6,22 @@ title: "K01: 安全でないワークロード設定 (Insecure Workload Configur
 
 ## 概要
 
-By default, workloads running in a Kubernetes cluster do not have strong security posture, which could make it easier for attackers to compromise applications and expand their compromise to other workloads or the cluster control plane.
+デフォルトでは、Kubernetes クラスタで実行しているワークロードは強力なセキュリティ態勢を持たず、攻撃者がアプリケーションを侵害し、その侵害を他のワークロードやクラスタのコントロールプレーンにまで拡大することが容易になる可能性があります。
 
-It's vital that `securityContext` settings are implemented and other hardening steps are applied to improve the overall security of the cluster.
-Description
-By default Kubernetes and the underlying container runtimes provide simple defaults which make it easy for application developers to run their workloads in the cluster. However in a number of places these defaults are not hardened for production deployment. Below are some of the key places where default values need to be changed:
+クラスタ全体のセキュリティを改善するには、`securityContext` 設定を実装し、その他の堅牢化対策を適用することが不可欠です。  
+説明  
+デフォルトでは Kubernetes と基盤となるコンテナランタイムはシンプルなデフォルト設定を提供しており、アプリケーション開発者はクラスタ上でワークロードを実行することが簡単になります。しかし、多くの箇所でこれらのデフォルト設定は本番環境向けには堅牢化されていません。以下ではデフォルト値を変更する必要がある主な箇所をいくつか示します。
 
-- **Running as root**. Running containers as the root user (UID 0) is dangerous as that user has special privileges on a Linux host, including access to a wider set of kernel code paths, increasing the risk of container breakout.
-- **Default Linux capabilities**. Container runtimes will provide a set of Linux capabilities which are portions of the overall root privileges to all containers. Some of these capabilities can be dangerous and make it easier for attackers to attempt to compromise other containers or systems in the cluster.
-- **Service Account Tokens**. Each Pod gets a service account token mounted by default which provides access to the Kubernetes API. This can allow an attacker to gain more information about the cluster and, if mis-configured, could allow for compromise of the cluster.
-- **Removing Seccomp Filters**. Major container runtimes like containerd add a seccomp filter which helps to reduce the risk of container breakout, however Kubernetes defaults to Unconfined seccomp mode, meaning the runtime's built-in filter is not applied unless explicitly configured..
-- **Missing Resource Limits**. Kubernetes does not enforce CPU/memory limits by default. A compromised container can exhaust node resources, causing Denial of Service for co-located workloads
+- **root として実行**。コンテナを root ユーザー (UID 0) として実行することは危険です。より広範なカーネルコードパスへのアクセスなど、そのユーザーは Linux ホスト上で特別な権限を持ち、コンテナのブレイクアウトのリスクを高めます。
+- **デフォルトの Linux 機能**。コンテナランタイムはすべてのコンテナに全体的な root 権限の一部である一連の Linux 機能を提供します。これらの機能の中には危険なものがあり、攻撃者がクラスタ内の他のコンテナやシステムを侵害しようとするのを容易にする可能性があります。
+- **サービスアクセストークン**。各 Pod はデフォルトでサービスアクセストークンがマウントされ、Kubernetes API へのアクセスを提供します。これにより、攻撃者はクラスタに関するより多くの情報を取得できる可能性があり、設定が誤っている場合には、クラスタの侵害につながる可能性があります。
+- **seccomp フィルタの削除**。containerd などの主要なコンテナランタイムは、コンテナのブレイクアウトのリスクを軽減するのに役立つ seccomp フィルタを追加しますが、Kubernetes はデフォルトで制限なしの seccomp モードになっており、ランタイムの組み込みフィルタは明示的に設定しない限り適用されません。
+- **リソース制限の欠如**。Kubernetes はデフォルトで CPU/メモリ制限を適用しません。侵害されたコンテナはノードのリソースを枯渇し、同じ場所に配置されたワークロードに対してサービス拒否を引き起こす可能性があります。
 
-In addition to dangerous defaults there are some workload security settings which should be avoided wherever possible.
+危険なデフォルトに加えて、可能な限り避けるべきワークロードセキュリティ設定がいくつかあります。
 
-- **Privileged**. A privileged container will be able to break out to the underlying host, and this setting should not be used unless absolutely required.
-- **Host namespaces**. Containers use namespaces to provide isolation from the underlying host, and removing that protection weakens container isolation. Workloads should not use host namespaces unless their functionality explicitly requires it.
+- **特権付け**。特権付けられたコンテナは基盤となるホストに脱出できるため、この設定は絶対に必要な場合を除き使用すべきではありません。
+- **ホスト名前空間**。コンテナは名前空間を使用して基盤となるホストからの分離を提供しており、その保護を解除するとコンテナの分離を弱めます。ワークロードは、その機能が明示的に必要な場合を除き、ホスト名前空間を使用すべきではありません。
 
 ## 防止方法
 
