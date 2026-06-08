@@ -25,9 +25,9 @@ title: "K01: 安全でないワークロード設定 (Insecure Workload Configur
 
 ## 防止方法
 
-There are a number of ways in which the configuration of Kubernetes workloads can be improved from the default values. The first place to look is in the security context section, but some of the settings are also in the general pod or container specification.
+Kubernetes ワークロードの設定をデフォルト値から改善する方法はいくつかあります。まず見るべきはセキュリティコンテキストセクションですが、一部の設定は Pod またはコンテナの一般的な仕様にもあります。
 
-There are a large number of available options which can be set at either the pod level or at the level of the individual container. Whilst all of them can be important, we'll discuss some key options that every workload should consider setting as they make major improvements to the security of workloads running in clusters.
+ポッドレベルまたは個々のコンテナレベルで設定できるオプションが数多くあります。これらはすべて重要ですが、クラスタで実行するワークロードのセキュリティを大幅に改善するため、すべてのワークロードが設定を検討すべき主要なオプションについて説明します。
 
 ### 非ルートとして実行
 
