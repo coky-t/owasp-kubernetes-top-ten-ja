@@ -31,10 +31,10 @@ Kubernetes ワークロードの設定をデフォルト値から改善する方
 
 ### 非ルートとして実行
 
-One of the most important changes in workload security is to ensure that your applications 
-do not run as the root user on the host. Running as the root user makes it much easier for an attacker who compromises an application running in a container to break out to the underlying cluster node.
+ワークロードセキュリティの最も重要な変更の一つは、アプリケーションがホスト上でルートユーザーとして実行しないようにすることです。
+ルートユーザーとして実行すると、コンテナ内で動作するアプリケーションを侵害する攻撃者が、基盤となるクラスタノードへブレイクアウトすることが非常に容易になります。
 
-There are a couple of different approaches that can be used to achieve this. Firstly you can specify the `runAsUser` and `runAsGroup` for all containers in a pod. In the example all processes in containers in this pod will run as UID 1000 and GID 3000.
+これを実現できるいくつかの異なるアプローチがあります。一つ目として pod 内のすべてのコンテナに対して `runAsUser` と `runAsGroup` を指定できます。この例では、この pod 内のコンテナにあるすべてのプロセスが UID 1000 および GID 3000 として動作します。
 
 ```yaml
  securityContext:
@@ -42,7 +42,7 @@ There are a couple of different approaches that can be used to achieve this. Fir
     runAsGroup: 3000
 ```
 
-Another approach that's available in Kubernetes 1.33 and later, is to use user namespaces to ensure that your containers won't run as root on the host, even if they are running in root in the container. This can be specified with the `hostUsers` setting
+Kubernetes 1.33 で利用可能なもう一つのアプローチはユーザー名前空間を使用することです。コンテナ内ではルートで実行していても、ホスト上ではコンテナがルートとして動作しないように確保します。これは `hostUsers` 設定で指定できます。
 
 ```yaml
 spec:
