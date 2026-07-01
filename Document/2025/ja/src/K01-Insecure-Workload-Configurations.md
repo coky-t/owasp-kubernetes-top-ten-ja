@@ -52,7 +52,7 @@ spec:
 
 ### ケイパビリティのドロップ
 
-By default containers get given a set of capabilities for privileged operation. Removing these capabilities reduces the risk of container breakout and most applications won't need them.
+デフォルトでは、コンテナには特権操作のための一連のケイパビリティを付与しています。これらのケイパビリティを削除することでコンテナブレイクアウトのリスクを低減し、ほとんどのアプリケーションはそれらを必要としていません。
 
 ```yaml
       securityContext:
