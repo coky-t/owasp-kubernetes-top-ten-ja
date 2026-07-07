@@ -66,7 +66,7 @@ spec:
 
 ### readOnlyRootFilesystem の有効化
 
-Most malware and exploit payloads require writing to /tmp or /bin. Forcing a read-only root FS makes it significantly harder for an attacker to maintain persistence or install tools. If applications need to write logs or temp files should use `emptyDir` volumes instead of writing to the container layer.
+ほとんどのマルウェアとエクスプロイトのペイロードは /tmp または /bin への書き込みを必要とします。ルートファイルシステムを読み込み専用に強制することで、攻撃者が永続性を維持したり、ツールをインストールすることが著しく困難になります。アプリケーションがログや一時ファイルを書き込む必要がある場合には、コンテナレイヤに書き込むのではなく `emptyDir` ボリュームを使用すべきです。
 
 ### allowPrivilegeEscalation の無効化
 
