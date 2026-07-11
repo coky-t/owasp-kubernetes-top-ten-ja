@@ -4,7 +4,7 @@ This is the unofficial Japanese translation of the [OWASP Kubernetes Top Ten](ht
 
 **!!! Work In Progress !!!**
 
-- Document Site - <https://coky-t.gitbook.io/owasp-kubernetes-top-ten-ja/>
+<!-- - Document Site - <https://coky-t.gitbook.io/owasp-kubernetes-top-ten-ja/> -->
 - Document Repository - <https://github.com/coky-t/owasp-kubernetes-top-ten-ja>
 
 ### Originator
