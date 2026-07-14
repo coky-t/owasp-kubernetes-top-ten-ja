@@ -70,11 +70,11 @@ spec:
 
 ### allowPrivilegeEscalation の無効化
 
-The ‍`allowPrivilegeEscalation: false` setting enforces the `no_new_privs` kernel flag, which prevents a process from gaining more privileges than its parent. In a standard Linux environment, an attacker can exploit files with the SUID bit to temporarily elevate their effective UID to root, even if the container started as a non privileged user. By disabling this escalation, you ensure that the kernel blocks any attempts to bypass user restrictions, effectively neutralizing a primary path for local privilege escalation and reducing the risk of a full container breakout
+‍`allowPrivilegeEscalation: false` 設定は `no_new_privs` カーネルフラグを強制します。これはプロセスが親プロセスよりも高い権限を獲得することを防止します。標準的な Linux 環境では、攻撃者は SUID ビットを持つファイルを悪用して、コンテナが非特権ユーザーとして起動された場合でも、一時的に実効 UID を root に昇格できます。この昇格を無効にすることで、カーネルがユーザー制限をバイパスしようとするあらゆる試みをブロックし、ローカル権限昇格の主要な経路を効果的に無効化し、コンテナ全体のブレイクアウトのリスクを低減します。
 
-Not mounting service account tokens
+### サービスアカウントトークンをマウントしない
 
-Unless your application needs to communicate with the Kubernetes API, you should configure the pod not to mount a service account token.
+アプリケーションが Kubernetes API と通信する必要がない限り、サービスアカウントトークンをマウントしないように pod を設定すべきです。
 
 ```yaml
     spec:
@@ -83,7 +83,7 @@ Unless your application needs to communicate with the Kubernetes API, you should
 
 ### Seccomp フィルタの有効化
 
-Re-enabling the container runtime's seccomp filter will improve the overall security of the workload and reduce the risk of container breakout.
+コンテナランタイムの seccomp フィルタを再度有効にすることで、ワークロードの全体的なセキュリティを向上し、コンテナブレイクアウトのリスクを低減します。
 
 ```yaml
     spec:
