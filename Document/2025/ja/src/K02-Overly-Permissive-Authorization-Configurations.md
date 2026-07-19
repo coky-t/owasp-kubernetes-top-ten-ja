@@ -6,7 +6,7 @@ title: "K02: 過度に許可を与える認可設定 (Overly Permissive Authoriz
 
 ## 概要
 
-Kubernetes provides a rich and flexible set of options for authorizing users and services to operate on cluster objects. With that flexibility, goes the risk of excessive access which could allow for unauthorized access to Kubernetes resources.
+Kubernetes は、ユーザーやサービスがクラスタオブジェクトを操作することを認可するための、一連の豊富で柔軟なオプションを提供します。その柔軟性により、Kubernetes リソースへの不正アクセスを許す、過剰なアクセスのリスクを生じます。
 
 ## 説明
 
