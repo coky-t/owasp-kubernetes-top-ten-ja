@@ -10,7 +10,7 @@ Kubernetes は、ユーザーやサービスがクラスタオブジェクトを
 
 ## 説明
 
-There are a number of things to think about when looking at authorization configuration in Kubernetes.
+Kubernetes の認可設定を検討する際には考慮すべき点がいくつかあります。
 
 ### よくある RBAC の誤設定
 
