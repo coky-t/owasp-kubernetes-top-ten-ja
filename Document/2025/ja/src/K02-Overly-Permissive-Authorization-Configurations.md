@@ -14,18 +14,18 @@ Kubernetes の認可設定を検討する際には考慮すべき点がいくつ
 
 ### よくある RBAC の誤設定
 
-There are a number of places where RBAC misconfigurations commonly occur. For more detailed guidance see the [Kubernetes Role Based Access Control Good Practices](https://kubernetes.io/docs/concepts/security/rbac-good-practices/)
+RBAC 設定ミスが一般的に発生する箇所はいくつかあります。詳細なガイダンスについては [Kubernetes Role Based Access Control Good Practices](https://kubernetes.io/docs/concepts/security/rbac-good-practices/) を参照してください。
 
-- **Using cluster-admin.** The cluster-admin clusterrole in Kubernetes provides unlimited access to all cluster resources, including sensitive data such as secrets. Allowing users to use this role also presents a risk of accidental deletion of modification of resources in the cluster.  
-- **Using in-built Kubernetes Clusterroles.** Kubernetes provides a number of in-built clusterroles such as `view` and `edit`. It can be tempting to use these options as they are built-in, however they can provide quite wide ranging permissions that don't align with the user's needs.  
-- **LIST & WATCH rights to secrets.** Whilst it's clear that allowing users to GET secret objects would allow for their disclosure, it's also important to note that allowing LIST or WATCH rights to secrets also allows users to see the contents of those secrets.  
-- **Node/proxy rights provide Kubelet API access.** Any user who gets rights to the proxy sub-resource of node objects in Kubernetes can connect to the Kubelet API directly bypassing audit logging and admission control requirements, so care should be taken when granting that access.  
-- **Using ESCALATE, BIND and IMPERSONATE permissions.** Using the verbs like escalate, bind and impersonate can allow users to bypass protections of privilege escalation. The escalate verb allows users to create a clusterrole with more rights than they already have. The bind permission allows users to bind to a clusterrole to which they are not already bound. The impersonate user allows users to impersonate other users in the cluster.  
-- **PATCH on namespace.** Users who have patch permissions to namespaces can update the namespace labels. In clusters where Pod Security Admission is used, this may allow a user to configure the namespace for a more permissive policy than intended by the administrators. For clusters where NetworkPolicy is used, users may be set labels that indirectly allow access to services that an administrator did not intend to allow.  
-- **Third Party Shadow RBAC.** A significant yet frequently overlooked risk is the introduction of "Shadow RBAC" through the deployment of third party Helm charts, Operators, or external manifests. To ensure out of the box functionality, many community maintained packages default to over privileged configurations, such as the silent provisioning of ClusterRole/ClusterRoleBinding and  the excessive use of wildcards `*` for API verbs and resources. This creates an expansive blast radius where a compromised application inherits broad discovery or administrative capabilities across the entire cluster. Furthermore many charts fail to disable the automatic mounting of ServiceAccount tokens, providing an immediate vector for lateral movement. An attacker gaining shell access can leverage these pre authenticated credentials to query the API server, even if the application itself has no functional requirement.  
-- **Be aware of ClusterRole Aggregation.** Third-party operators can silently extend built-in roles (like admin) by adding matching labels to their custom ClusterRoles, effectively granting themselves admin rights.
+- **cluster-admin の使用。** Kubernetes の cluster-admin ClusterRole は、シークレットなどの機密データを含む、すべてのクラスタリソースへの無制限のアクセスを提供します。ユーザーにこのロールの使用を許可すると、クラスタ内のリソースの誤った削除や改変のリスクも生じます。
+- **ビルトインの Kubernetes ClusterRole の使用。** Kubernetes は `view` や `edit` などのいくつかのビルトインの ClusterRole を提供しています。それらはビルトインであるため、これらのオプションを使用する誘惑にかられますが、ユーザーのニーズに合わない非常に広範なパーミッションを提供する恐れがあります。
+- **シークレットへの LIST および WATCH 権限。** ユーザーにシークレットオブジェクトの GET を許可すると、それらが漏洩する可能性があることは明らかですが、シークレットへの LIST や WATCH の権限を許可しても、ユーザーがそれらのシークレットの内容を閲覧できることに注意することも重要です。
+- **Kubelet API アクセスを提供する Node/Proxy 権限。** Kubernetes で Node オブジェクトの Proxy サブリソースへの権限を持つユーザーは、監査ログ記録や Admission Control 要件をバイパスして Kubelet API に直接接続できます。そのため、そのアクセスを付与する際には注意が必要です。
+- **ESCALATE, BIND, IMPERSONATE パーミッションの使用。** escalate, bind, impersonate といった動詞を使用すると、ユーザーは権限昇格の保護をバイパスできる可能性があります。escalate 動詞は、ユーザーが既に持っている権利よりも多くを持つ ClusterRole を作成できます。bind パーミッションは、ユーザーがまだバインドされていない ClusterRole をバインドできます。impersonate ユーザーは、ユーザーがクラスタ内の他のユーザーになりすますことができます。
+- **Namespace 上での PATCH。** Namespace への PATCH パーミッションを持つユーザーは Namespace ラベルを更新できます。Pod Security Admission が使用されているクラスタでは、これはユーザーが管理者が意図したものより寛容なポリシーの Namespace を設定できる可能性があります。NetworkPolicy が使用されているクラスタでは、管理者が許可することを意図していないサービスへのアクセスを間接的に許可するラベルを、ユーザーが設定できる可能性があります。
+- **サードパーティのシャドウ RBAC。** サードパーティの Helm チャート、Operator、外部マニフェストのデプロイメントを通じて「シャドウ RBAC」をもたらすリスクは重大ですがしばしば見落とされがちです。導入直後の機能性を確保するために、コミュニティが管理する多くのパッケージはデフォルトで過剰な権限設定になっています。ClusterRole/ClusterRoleBinding の暗黙的なプロビジョニングや、API 動詞やリソースに対するワイルドカード `*` の過剰使用といったものです。これは被害範囲の拡大をもたらし、侵害されたアプリケーションがクラスタ全体にわたる広範な発見や管理権限を継承してしまいます。さらに、多くのチャートは ServiceAccount トークンの自動マウンティングを無効化できておらず、ラテラルムーブメントの即時的な経路を提供します。シェルアクセスを獲得した攻撃者は、たとえアプリケーション自体が機能要件を持たないとしても、これらの認証済みクレデンシャルを活用して API サーバーにクエリできます。
+- **ClusterRole Aggregation に注意。** サードパーティ Operator は、独自の ClusterRole に特定のラベルを追加することで、ビルトインろーる (admin など) を密かに拡張し、実質的に管理者権限を付与できます。
 
- 
+
 ### 複数の認可者
 
 Kubernetes allows for multiple different authorization modes to exist in every cluster. In most clusters RBAC will be used for authorization, however Webhook authorization is also commonly used in managed Kubernetes clusters.
