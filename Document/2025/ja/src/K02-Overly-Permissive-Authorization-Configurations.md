@@ -26,13 +26,13 @@ RBAC 設定ミスが一般的に発生する箇所はいくつかあります。
 - **ClusterRole Aggregation に注意。** サードパーティ Operator は、独自の ClusterRole に特定のラベルを追加することで、ビルトインろーる (admin など) を密かに拡張し、実質的に管理者権限を付与できます。
 
 
-### 複数の認可者
+### 複数のオーソライザ
 
-Kubernetes allows for multiple different authorization modes to exist in every cluster. In most clusters RBAC will be used for authorization, however Webhook authorization is also commonly used in managed Kubernetes clusters.
+Kubernetes は、複数の異なる認可モードがすべてのクラスタに存在できます。ほとんどのクラスタでは RBAC が認可に使用されますが、マネージド Kubernetes クラスタでは Webhook 認可もよく使用されます。
 
-The rights that a user or service has to the cluster will be the union of all rights provided from any configured authorization mechanism, so it's important to check all configured options when reviewing a cluster's authorization posture.
+ユーザーやサービスがクラスタに対して持つ権限は、設定された認可メカニズムによって提供される権限を統合したものになります。そのため、クラスタの認可態勢をレビューする際には、設定されているすべてのオプションをチェックすることが重要です。
 
-Another important point to note is that in-built Kubernetes features like `kubectl auth can-i --list` do not take account of rights provided by non-RBAC authorization systems, so effective auditing of Kubernetes permissions must be done for each authorizer in the cluster.
+もう一つの重要な点は、`kubectl auth can-i --list` のようなビルトインの Kubernetes 機能は、非 RBAC 認可システムで提供された権限を考慮しないことです。そのため、Kubernetes パーミッションの効果的な監査にはクラスタ内の各オーソライザごとに行う必要があります。
 
 ## 防止方法
 
