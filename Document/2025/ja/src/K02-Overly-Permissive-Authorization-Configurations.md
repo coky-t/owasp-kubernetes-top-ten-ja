@@ -23,7 +23,7 @@ RBAC 設定ミスが一般的に発生する箇所はいくつかあります。
 - **ESCALATE, BIND, IMPERSONATE パーミッションの使用。** escalate, bind, impersonate といった動詞を使用すると、ユーザーは権限昇格の保護をバイパスできる可能性があります。escalate 動詞は、ユーザーが既に持っている権利よりも多くを持つ ClusterRole を作成できます。bind パーミッションは、ユーザーがまだバインドされていない ClusterRole をバインドできます。impersonate ユーザーは、ユーザーがクラスタ内の他のユーザーになりすますことができます。
 - **Namespace 上での PATCH。** Namespace への PATCH パーミッションを持つユーザーは Namespace ラベルを更新できます。Pod Security Admission が使用されているクラスタでは、これはユーザーが管理者が意図したものより寛容なポリシーの Namespace を設定できる可能性があります。NetworkPolicy が使用されているクラスタでは、管理者が許可することを意図していないサービスへのアクセスを間接的に許可するラベルを、ユーザーが設定できる可能性があります。
 - **サードパーティのシャドウ RBAC。** サードパーティの Helm チャート、Operator、外部マニフェストのデプロイメントを通じて「シャドウ RBAC」をもたらすリスクは重大ですがしばしば見落とされがちです。導入直後の機能性を確保するために、コミュニティが管理する多くのパッケージはデフォルトで過剰な権限設定になっています。ClusterRole/ClusterRoleBinding の暗黙的なプロビジョニングや、API 動詞やリソースに対するワイルドカード `*` の過剰使用といったものです。これは被害範囲の拡大をもたらし、侵害されたアプリケーションがクラスタ全体にわたる広範な発見や管理権限を継承してしまいます。さらに、多くのチャートは ServiceAccount トークンの自動マウンティングを無効化できておらず、ラテラルムーブメントの即時的な経路を提供します。シェルアクセスを獲得した攻撃者は、たとえアプリケーション自体が機能要件を持たないとしても、これらの認証済みクレデンシャルを活用して API サーバーにクエリできます。
-- **ClusterRole Aggregation に注意。** サードパーティ Operator は、独自の ClusterRole に特定のラベルを追加することで、ビルトインろーる (admin など) を密かに拡張し、実質的に管理者権限を付与できます。
+- **ClusterRole Aggregation に注意。** サードパーティ Operator は、独自の ClusterRole に特定のラベルを追加することで、ビルトインロール (admin など) を密かに拡張し、実質的に管理者権限を付与できます。
 
 
 ### 複数のオーソライザ
@@ -36,15 +36,15 @@ Kubernetes は、複数の異なる認可モードがすべてのクラスタに
 
 ## 防止方法
 
-The main principle that should be followed when designing authorization in Kubernetes clusters is to use a "least privileges" approach. Excessive general privileges should be avoided both for interactive users and services accessing the Kubernetes API.
+Kubernetes クラスタでの認可を設計する際、従うべき基本原則は「最小権限」アプローチを使用することです。過剰で広範な権限は、対話型ユーザーと、Kubernetes API にアクセスするサービスの双方に対して避けるべきです。
 
-For administrators, consider carefully using the impersonation system in Kubernetes to provide a lower privileged main account which can escalate its privileges when needed for specific operations as this will help avoid accidental damage to Kubernetes objects. Note that the impersonation system should be used with care only allowing escalation to specific resource names and not to all users.
+管理者の方々は、Kubernetes のなりすましシステムを使用することを慎重に考慮します。より低い権限のメインアカウントを提供して、特定の操作で必要な場合にその権限を昇格できるようにすることで、これは Kubernetes オブジェクトへの意図しない損害を避けるのに役立ちます。すべてのユーザーではなく、特定のリソース名に昇格を許可するように、そのなりすましシステムを慎重に使用すべきであることに注意します。
 
-In as much as possible, rights should be provided through a single authorization method and not via a mix of different authorizers as it is difficult to audit Kubernetes permissions across multiple authorization systems.
+複数の認可システムにまたがって Kubernetes パーミッションを監査することは困難であるため、さまざまな認可器を混在するのではなく、可能な限り、単一の認可方式を通じて権限を提供すべきです。
 
-While the principle of least privilege must be the baseline for all kubernetes authorization, operational cases such as emergency debugging of a production incident or performing a sensitive one off change necessitate temporary elevated access. To manage these risks , organizations(the cluster admin) should move beyond the static assignment toward a process driven architecture. Granting privileged access should never be an adhoc manual task. It must be a process oriented workflow where every change is documented. In addition to Kubernetes audit logs, the access grant and related changes should be recorded and traceable outside the cluster as well, typically through GitOps (e.g.,. pull requests and an immutable change history).
+最小権限の原則がすべての Kubernetes 認可のベースラインでなければなりませんが、本番インシデントの緊急デバッグや、機密性の高い単発の変更の実施といった運用上のケースでは一時的に昇格したアクセスを必要とします。こうしたリスクを管理するには、組織 (クラスタ管理者) は静的な割り当てを脱却し、プロセス主導型アーキテクチャに移行すべきです。特権アクセスの付与は場当たり的に手動タスクとすべきではありません。それはすべての変更が記録されるプロセス指向のワークフローでなければなりません。Kubernetes の監査ログに加えて、アクセス付与や関連する変更はクラスタの外部でも記録および追跡されるべきであり、一般的には GitOps (プルリクエストと不変な変更履歴など) を通じて行います。
 
-For a more resilient security posture and to reduce clusters attack surface, organizations should implement Just In Time (JIT) Access, with tools that create and expire ClusterRoleBindings and RoleBindings on demand. Simple implementations can use short-lived kubeconfig files with OIDC token expiry. This approach effectively eliminates standing privileges by providing ephemeral on demand access. JIT access replaces broad permanent privileges with dynamic time bound authorizations that automatically expire after a specific time. By leveraging granular approval workflows such as multi party verification or context aware auto approvals, JIT ensures that elevated rights are precisely aligned with actual operational needs. This dynamic approach provides a clear, comprehensive audit trail, making it easier to document exactly who had access to what, when, and why.
+より堅牢なセキュリティ態勢と、クラスタの攻撃対象領域を縮小するために、組織は Just In Time (JIT) アクセスを導入すべきであり、必要に応じて ClusterRoleBindings や RoleBindings を作成および期限切れにするツールを用います。シンプルな実装としては OIDC トークンの有効期限と連動した短期有効な kubeconfig ファイルを使用できます。このアプローチは、一時的なオンデマンドアクセスを提供することによって、常時有効な特権を実質的に排除します。JIT アクセスは、広範かつ永続的な特権の代わりに、特定の時間後に自動的に期限切れになる、動的かつ期間限定の認可を用います。マルチパーティ検証やコンテキストアウェアの自動承認といった、きめ細かな承認ワークフローを活用することで、JIT は、昇格された権利が実際の運用ニーズと正確に合致することを確保します。この動的なアプローチは、明確かつ包括的な監査証跡を提供し、誰が、何に、いつ、なぜアクセスしたかを正確に記録することを容易にします。
 
 ## 参考情報
 
