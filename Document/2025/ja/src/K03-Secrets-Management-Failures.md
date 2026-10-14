@@ -6,7 +6,7 @@ title: "K03: シークレット管理の不備 (Secrets Management Failures)"
 
 ## 概要
 
-Applications running in Kubernetes clusters need access to secrets (e.g. API keys, database credentials) for their operation, and it's important to ensure that these secrets are managed securely, as unauthorized access to secrets can have serious consequences for organization's security.
+Kubernetes クラスタで動作するアプリケーションはその稼働にシークレット (API キー、データベースクレデンシャルなど) へのアクセスを必要とします。シークレットへの不正アクセスは組織のセキュリティに重大な影響を及ぼす恐れがあるため、これらのシークレットは安全に管理されるようにすることが重要です。
 
 ## 説明
 
