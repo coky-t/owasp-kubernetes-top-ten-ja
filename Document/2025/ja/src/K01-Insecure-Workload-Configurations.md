@@ -9,7 +9,9 @@ title: "K01: 安全でないワークロード設定 (Insecure Workload Configur
 デフォルトでは、Kubernetes クラスタで実行しているワークロードは強力なセキュリティ態勢を持たず、攻撃者がアプリケーションを侵害し、その侵害を他のワークロードやクラスタのコントロールプレーンにまで拡大することが容易になる可能性があります。
 
 クラスタ全体のセキュリティを改善するには、`securityContext` 設定を実装し、その他の堅牢化対策を適用することが不可欠です。  
-説明  
+
+## 説明
+
 デフォルトでは Kubernetes と基盤となるコンテナランタイムはシンプルなデフォルト設定を提供しており、アプリケーション開発者はクラスタ上でワークロードを実行することが簡単になります。しかし、多くの箇所でこれらのデフォルト設定は本番環境向けには堅牢化されていません。以下ではデフォルト値を変更する必要がある主な箇所をいくつか示します。
 
 - **root として実行**。コンテナを root ユーザー (UID 0) として実行することは危険です。より広範なカーネルコードパスへのアクセスなど、そのユーザーは Linux ホスト上で特別な権限を持ち、コンテナのブレイクアウトのリスクを高めます。
@@ -42,7 +44,7 @@ Kubernetes ワークロードの設定をデフォルト値から改善する方
     runAsGroup: 3000
 ```
 
-Kubernetes 1.33 で利用可能なもう一つのアプローチはユーザー名前空間を使用することです。コンテナ内ではルートで実行していても、ホスト上ではコンテナがルートとして動作しないように確保します。これは `hostUsers` 設定で指定できます。
+もう一つのアプローチはユーザー名前空間を使用することです。Kubernetes 1.33 からデフォルトで有効になり、1.36 で安定版になりました。コンテナ内ではルートで実行していても、ホスト上ではコンテナがルートとして動作しないように確保します。これは `hostUsers` 設定で指定できます。ノードにはそれをサポートするコンテナランタイムとカーネルが必要です。[ユーザー名前空間](https://kubernetes.io/docs/concepts/workloads/pods/user-namespaces/) を参照してください。
 
 ```yaml
 spec:
@@ -92,9 +94,26 @@ spec:
           type: RuntimeDefault
 ```
 
+Cluster operators can also make this the default for every Pod on a node by running the kubelet with `--seccomp-default` (or `seccompDefault: true` in the kubelet configuration), which is stable since Kubernetes 1.27. Pods that set no profile then get `RuntimeDefault` instead of `Unconfined`. Roll it out gradually, since a workload that relies on a blocked syscall will fail at runtime; see [Enable the use of RuntimeDefault as the default seccomp profile](https://kubernetes.io/docs/tutorials/security/seccomp/#enable-the-use-of-runtimedefault-as-the-default-seccomp-profile-for-all-workloads).
+
+### Set resource requests and limits
+
+Give each container CPU and memory requests and limits so a compromised or misbehaving workload can't starve the rest of the node. A `LimitRange` in each namespace applies defaults to containers that don't set their own, and a `ResourceQuota` caps the total a namespace can use.
+
+```yaml
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          memory: 256Mi
+```
+
 
 ## 参考情報
 
  - [Kubernetes Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
  - [Kubernetes Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
- - [CIS Benchmark for Kubernetes] - Sections 5.1 and 5.2
+ - [CIS Benchmark for Kubernetes](https://www.cisecurity.org/benchmark/kubernetes) - Sections 5.1 and 5.2
+ - [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
+ - [Limit Ranges](https://kubernetes.io/docs/concepts/policy/limit-range/)
