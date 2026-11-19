@@ -94,7 +94,7 @@ spec:
           type: RuntimeDefault
 ```
 
-Cluster operators can also make this the default for every Pod on a node by running the kubelet with `--seccomp-default` (or `seccompDefault: true` in the kubelet configuration), which is stable since Kubernetes 1.27. Pods that set no profile then get `RuntimeDefault` instead of `Unconfined`. Roll it out gradually, since a workload that relies on a blocked syscall will fail at runtime; see [Enable the use of RuntimeDefault as the default seccomp profile](https://kubernetes.io/docs/tutorials/security/seccomp/#enable-the-use-of-runtimedefault-as-the-default-seccomp-profile-for-all-workloads).
+クラスタオペレータは、kubelet を `--seccomp-default` (または kubelet 設定で `seccompDefault: true`) 指定で実行すると、ノード上のすべての Pod に対してこれをデフォルトにもできます。これは Kubernetes 1.27 以降に安定版となりました。それから、プロファイルを設定しない Pod は `Unconfined` ではなく `RuntimeDefault` を取得します。ブロックされたシステムコールに依存するワークロードは実行時に失敗するため、段階的に導入してください。[デフォルト seccomp プロファイルとして RuntimeDefault の使用を有効にする](https://kubernetes.io/docs/tutorials/security/seccomp/#enable-the-use-of-runtimedefault-as-the-default-seccomp-profile-for-all-workloads) を参照してください。
 
 ### Set resource requests and limits
 
